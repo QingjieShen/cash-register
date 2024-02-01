@@ -7,7 +7,7 @@
 :root {
     --background: rgb(20, 20, 20);
     --text-color: rgb(230, 230, 230);
-    --drawer-color: rgb(79, 215, 242);
+    --drawer-color: rgb(72, 172, 244);
     --button-color-dark: rgb(255, 128, 0);
     --button-color-light: rgb(240, 193, 105);
 }
@@ -62,4 +62,81 @@ label, button, input {
     border-color: var(--button-color-light);
     border-width: 2px;
     margin-top: 15px;
+}
+
+/* Style the cash drawer*/
+.cash-drawer {
+    margin-top: 30px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.screen {
+    width: 200px;
+    height: 50px;
+    background-color: var(--drawer-color);
+    border-radius: 2px;
+    padding: 8px;
+}
+
+.screen p {
+    background-color: var(--background);
+    padding: 8px;
+}
+
+.connector {
+    width: 40px;
+    height: 35px;
+    background-color: var(--drawer-color);
+    margin-right: 120px;
+}
+
+.body {
+    width: 300px;
+    height: 250px;
+    background-color: var(--drawer-color);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.number-pannal {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    height: 70px;
+}
+
+.number {
+    width: 20px;
+    height: 20px;
+    background-color: var(--background);
+}
+
+.change-info {
+    background: var(--text-color);
+    color: var(--background);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.drawer-locker {
+    width: 300px;
+    height: 50px;
+    background-color: var(--drawer-color);
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.locker {
+    width: 20px;
+    height: 20px;
+    background-color: var(--background);
+    border-radius: 50px;
 }
