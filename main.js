@@ -1,5 +1,7 @@
 const cash = document.getElementById("cash");
 const purchaseBtn = document.getElementById("purchase-btn");
+const cashDrawerScreen = document.querySelector(".screen");
+const changeInfo = document.querySelector(".change-info");
 const cashDrawerStatus = [
     "Status: INSUFFICIENT_FUNDS",
     "Status: CLOSED",
@@ -16,6 +18,17 @@ const currencyUnit = [
     ["TWENTY", 20],
     ["ONE HUNDRED", 100] 
 ];
+const currencyToDisplay = [
+    ["PENNY", "Pennies"],
+    ["NICKLE", "Nickels"],
+    ["DIME", "Dimes"],
+    ["QUARTER", "Quarters"],
+    ["ONE", "Ones"],
+    ["FIVE", "Fives"],
+    ["TEN", "Tens"],
+    ["TWENTY", "Twenties"],
+    ["ONE HUNDRED", "Hundreds"] 
+]
 
 let price = 1.87;
 let cid = [
@@ -30,8 +43,31 @@ let cid = [
     ["ONE HUNDRED", 100]
 ];
 
+// display the price which customer need to pay
+const showTotalPrice = (price) => {
+    cashDrawerScreen.innerHTML = `<p>Total: $${price}</p>`;
+}
+
+// shows and updates the change in the drawer
+const showCID = () => {
+    let changeInDrawer = [];
+    for (let i = 0; i < cid.length; i++) {
+        for(let j = 0; j < currencyToDisplay.length; j++) {
+            if (cid[i][0] === currencyToDisplay[j][0]) {
+                changeInDrawer.push([currencyToDisplay[j][1], cid[i][1]])
+            }
+        }
+    }
+    changeInDrawer.forEach((el) => {
+        changeInfo.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
+    }) 
+}
+
+
 // The main function, used to calculate the change result
 const change = () =>{
+    // refresh the change in drawer
+    showCID();
     // if the money customer gave is less than the price due, give an alert
 
     // if the money customer gave is equal to the price due, just take the money and add the money to cash drwer
@@ -41,6 +77,12 @@ const change = () =>{
 
 // exchange function used to check if we can return the exact change.
 
+
+// load the total price when loading the html page
+document.addEventListener("DOMContentLoaded", () => {
+    cashDrawerScreen.innerHTML = `<p>Total: $${price}</p>`;
+    showCID(cid);
+ });
 
 // detect user click event or press "Enter" after typing the number
 purchaseBtn.addEventListener("click", change)
