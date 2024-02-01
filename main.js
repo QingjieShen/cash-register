@@ -1,6 +1,7 @@
 const cash = document.getElementById("cash");
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashDrawerScreen = document.querySelector(".screen");
+const changeDue = document.getElementById("change-due");
 const changeInfo = document.querySelector(".change-info");
 const cashDrawerStatus = [
     "Status: INSUFFICIENT_FUNDS",
@@ -48,6 +49,7 @@ const showTotalPrice = (price) => {
     cashDrawerScreen.innerHTML = `<p>Total: $${price}</p>`;
 }
 
+
 // shows and updates the change in the drawer
 const showCID = () => {
     let changeInDrawer = [];
@@ -64,27 +66,27 @@ const showCID = () => {
     }) 
 }
 
-
 // The main function, used to calculate the change result
 const change = () =>{
     // refresh the change in drawer
     showCID();
     // if the money customer gave is less than the price due, give an alert
-    if (parseInt(cash.value) < price) {
+    if (parseFloat(cash.value) < price) {
         alert("Customer does not have enough money to purchase the item");
+    } else if (parseFloat(cash.value) === price) {
+        // if the money customer gave is equal to the price due, just take the money and add the money to cash drwer
+        changeDue.innerHTML = "<p>No change due - customer paid with exact cash</p>"
     }
-    // if the money customer gave is equal to the price due, just take the money and add the money to cash drwer
 
-    // if the money customer gave is enough, call the exchange() function
+    // clean up the input field
+    cash.value = "";
 }
-
-// exchange function used to check if we can return the exact change.
 
 
 // load the total price when loading the html page
 document.addEventListener("DOMContentLoaded", () => {
     cashDrawerScreen.innerHTML = `<p>Total: $${price}</p>`;
-    showCID(cid);
+    showCID();
  });
 
 // detect user click event or press "Enter" after typing the number
