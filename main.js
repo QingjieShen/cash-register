@@ -42,5 +42,10 @@ const change = () =>{
 // exchange function used to check if we can return the exact change.
 
 
-// detect user click event
+// detect user click event or press "Enter" after typing the number
 purchaseBtn.addEventListener("click", change)
+cash.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        change();
+    }
+})
