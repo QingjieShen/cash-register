@@ -58,6 +58,7 @@ const showCID = () => {
             }
         }
     }
+    changeInfo.innerHTML = "<h3>Change in drawer</h3>"
     changeInDrawer.forEach((el) => {
         changeInfo.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
     }) 
@@ -69,7 +70,9 @@ const change = () =>{
     // refresh the change in drawer
     showCID();
     // if the money customer gave is less than the price due, give an alert
-
+    if (parseInt(cash.value) < price) {
+        alert("Customer does not have enough money to purchase the item");
+    }
     // if the money customer gave is equal to the price due, just take the money and add the money to cash drwer
 
     // if the money customer gave is enough, call the exchange() function
