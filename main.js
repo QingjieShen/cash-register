@@ -1,4 +1,5 @@
 const cash = document.getElementById("cash");
+//const cashAmount = parseFloat(cash.value); // why cashAmount is NaN?
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashDrawerScreen = document.querySelector(".screen");
 const changeDue = document.getElementById("change-due");
@@ -66,6 +67,30 @@ const showCID = () => {
     }) 
 }
 
+// check if the money in cash drawer is greater than or equels to the change due 
+const isChangeEnough = () => {
+    let totalCashInDrawer = 0;
+    cid.forEach((el) => {
+        totalCashInDrawer += el[1];
+    })
+    console.log(totalCashInDrawer, parseFloat(cash.value));
+    if (totalCashInDrawer < parseFloat(cash.value) - price) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
+// changeResult() function to check 3 different change status
+const changeResult = (moneyPaid) => {
+    if (!isChangeEnough()) {
+        changeDue.innerHTML = `<p>${cashDrawerStatus[0]}</p>`;
+    } else {
+        
+    }
+}
+
 // The main function, used to calculate the change result
 const change = () =>{
     // refresh the change in drawer
@@ -76,7 +101,12 @@ const change = () =>{
     } else if (parseFloat(cash.value) === price) {
         // if the money customer gave is equal to the price due, just take the money and add the money to cash drwer
         changeDue.innerHTML = "<p>No change due - customer paid with exact cash</p>"
+    } else {
+        // here we are going to mantain when the customer paid enough money
+        // use the changeResult() function to check change status
+        changeResult(parseFloat(cash.value));
     }
+
 
     // clean up the input field
     cash.value = "";
