@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: rgb(20, 20, 20);
+    --text-color: rgb(230, 230, 230);
+    --drawer-color: rgb(79, 215, 242);
+    --button-color-dark: rgb(255, 128, 0);
+    --button-color-light: rgb(240, 193, 105);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#change-due {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#change-due p {
+    margin: 2px auto;
+}
+
+label, button, input {
+    display: block;
+    margin: 4px auto;
+}
+
+.input-cash {
+    display: flex;
+    flex-direction: column;
+}
+
+#cash {
+    height: 30px;
+    padding: 5px;
+}
+
+#purchase-btn {
+    padding: 5px 20px;
+    background: linear-gradient(var(--button-color-light), var(--button-color-dark));
+    font-weight: bold;
+    border-color: var(--button-color-light);
+    border-width: 2px;
+    margin-top: 15px;
+}
