@@ -84,19 +84,18 @@ const getChange = (changeLeft, totalCashInDrawer) => {
             changeInfoDetails.push([cidReverse[i][0], count * currencyReverse[i][1]]);
         }
     }
-    
     const changeInfoDetailsFiltered = changeInfoDetails.filter((el)=> {
         return el[1] > 0;
     });
+
     if (changeLeft > 0) {
         changeDue.innerHTML = `<p>${cashDrawerStatus[0]}</p>`;
-    } else if (changeLeft === 0 && totalCashInDrawer === 0) {
-        changeDue.innerHTML = `<p>${cashDrawerStatus[1]}</p>`;
-        changeInfoDetailsFiltered.forEach((el) => {
-            changeDue.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
-        })
+    // } else if (changeLeft === 0 && totalCashInDrawer === 0) {
+    //     changeDue.innerHTML = `<p>${cashDrawerStatus[1]}</p>`;
+    //     changeInfoDetailsFiltered.forEach((el) => {
+    //         changeDue.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
+    //     })
     } else {
-        changeDue.innerHTML = `<p>${cashDrawerStatus[2]}</p>`;
         changeInfoDetailsFiltered.forEach((el) => {
             cid.forEach((element) => {
                 if (el[0] === element[0]) {
@@ -104,7 +103,18 @@ const getChange = (changeLeft, totalCashInDrawer) => {
                     element[1] -= el[1];
                 }
             });
-            changeDue.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
+            totalCashInDrawer = 0;
+            cid.forEach((el) => {
+                totalCashInDrawer += el[1];
+            })
+            if (totalCashInDrawer === 0) {
+                changeDue.innerHTML = `<p>${cashDrawerStatus[1]}</p>`;
+            } else {
+                changeDue.innerHTML = `<p>${cashDrawerStatus[2]}</p>`;
+            }
+            changeInfoDetailsFiltered.forEach((el) => {
+                changeDue.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
+            })
         });
         showCID();
     }
