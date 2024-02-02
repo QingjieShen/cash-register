@@ -71,8 +71,8 @@ const showCID = () => {
 const getChange = (changeLeft) => {
     let changeInfoDetails = [];
     console.log("getChange() function called");
-    cidReverse = [...cid].reverse();
-    currencyReverse = [...currencyUnit].reverse();
+    const cidReverse = [...cid].reverse();
+    const currencyReverse = [...currencyUnit].reverse();
     for (let i = 0; i < cidReverse.length; i++) {
         console.log("Round:", i);
         if (changeLeft > currencyReverse[i][1] && changeLeft > 0) {
