@@ -32,17 +32,17 @@ const currencyToDisplay = [
     ["ONE HUNDRED", "Hundreds"] 
 ]
 
-let price = 1.87;
+let price = 19.5;
 let cid = [
-    ["PENNY", 1.01],
-    ["NICKLE", 2.05],
-    ["DIME", 3.1],
-    ["QUARTER", 4.25],
-    ["ONE", 90],
-    ["FIVE", 55],
-    ["TEN", 20],
-    ["TWENTY", 60],
-    ["ONE HUNDRED", 100]
+    ["PENNY", 0.5],
+    ["NICKLE", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 0],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0]
 ];
 
 // display the price which customer need to pay
@@ -68,7 +68,7 @@ const showCID = () => {
 }
 
 // 
-const getChange = (changeLeft) => {
+const getChange = (changeLeft, totalCashInDrawer) => {
     let changeInfoDetails = [];
     const cidReverse = [...cid].reverse();
     const currencyReverse = [...currencyUnit].reverse();
@@ -84,11 +84,20 @@ const getChange = (changeLeft) => {
             changeInfoDetails.push([cidReverse[i][0], count * currencyReverse[i][1]]);
         }
     }
+    
+    const changeInfoDetailsFiltered = changeInfoDetails.filter((el)=> {
+        return el[1] > 0;
+    });
     if (changeLeft > 0) {
         changeDue.innerHTML = `<p>${cashDrawerStatus[0]}</p>`;
+    } else if (changeLeft === 0 && totalCashInDrawer === 0) {
+        changeDue.innerHTML = `<p>${cashDrawerStatus[1]}</p>`;
+        changeInfoDetailsFiltered.forEach((el) => {
+            changeDue.innerHTML += `<p>${el[0]}: $${el[1]}</p>`
+        })
     } else {
         changeDue.innerHTML = `<p>${cashDrawerStatus[2]}</p>`;
-        changeInfoDetails.forEach((el) => {
+        changeInfoDetailsFiltered.forEach((el) => {
             cid.forEach((element) => {
                 if (el[0] === element[0]) {
                     //element[1] = (element[1] - el[1]).toFixed(2);
@@ -110,10 +119,8 @@ const isChangeEnough = (moneyPaid) => {
     })
     if (totalCashInDrawer < moneyPaid - price) {
         changeDue.innerHTML = `<p>${cashDrawerStatus[0]}</p>`;
-    } else if (totalCashInDrawer === moneyPaid - price){
-        changeDue.innerHTML = `<p>${cashDrawerStatus[1]}</p>`;
     } else {
-        getChange((moneyPaid - price));
+        getChange((moneyPaid - price), totalCashInDrawer);
     }
 }
 
