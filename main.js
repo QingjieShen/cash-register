@@ -70,11 +70,9 @@ const showCID = () => {
 // 
 const getChange = (changeLeft) => {
     let changeInfoDetails = [];
-    console.log("getChange() function called");
     const cidReverse = [...cid].reverse();
     const currencyReverse = [...currencyUnit].reverse();
     for (let i = 0; i < cidReverse.length; i++) {
-        console.log("Round:", i);
         if (changeLeft > currencyReverse[i][1] && changeLeft > 0) {
             let count = 0;
             let total = cidReverse[i][1];
@@ -84,7 +82,6 @@ const getChange = (changeLeft) => {
                 count++;
             }
             changeInfoDetails.push([cidReverse[i][0], count * currencyReverse[i][1]]);
-            console.log(changeInfoDetails);
         }
     }
     if (changeLeft > 0) {
@@ -107,7 +104,6 @@ const getChange = (changeLeft) => {
 
 // check if the money in cash drawer is greater than or equels to the change due 
 const isChangeEnough = (moneyPaid) => {
-    console.log("isChangeEnough() function excuted");
     let totalCashInDrawer = 0;
     cid.forEach((el) => {
         totalCashInDrawer += el[1];
