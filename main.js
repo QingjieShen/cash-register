@@ -1,5 +1,5 @@
 const cash = document.getElementById("cash");
-//const cashAmount = parseFloat(cash.value); // why cashAmount is NaN?
+const cashAmount = parseFloat(cash.value); // why cashAmount is NaN?
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashDrawerScreen = document.querySelector(".screen");
 const changeDue = document.getElementById("change-due");
@@ -169,4 +169,6 @@ cash.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         change();
     }
+    console.log(parseFloat(cash.value));
+    console.log(cashAmount);
 })
