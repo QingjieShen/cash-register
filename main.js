@@ -1,5 +1,4 @@
 const cash = document.getElementById("cash");
-const cashAmount = parseFloat(cash.value); // why cashAmount is NaN?
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashDrawerScreen = document.querySelector(".screen");
 const changeDue = document.getElementById("change-due");
@@ -34,15 +33,15 @@ const currencyToDisplay = [
 
 let price = 19.5;
 let cid = [
-    ["PENNY", 0.5],
-    ["NICKLE", 0],
-    ["DIME", 0],
-    ["QUARTER", 0],
-    ["ONE", 0],
-    ["FIVE", 0],
-    ["TEN", 0],
-    ["TWENTY", 0],
-    ["ONE HUNDRED", 0]
+    ["PENNY", 3.5],
+    ["NICKLE", 14],
+    ["DIME", 20],
+    ["QUARTER", 14.25],
+    ["ONE", 30],
+    ["FIVE", 25],
+    ["TEN", 30],
+    ["TWENTY", 60],
+    ["ONE HUNDRED", 100]
 ];
 
 // display the price which customer need to pay
@@ -138,17 +137,18 @@ const isChangeEnough = (moneyPaid) => {
 // The main function, used to calculate the change result
 const change = () =>{
     // refresh the change in drawer
+    const cashAmount = parseFloat(cash.value); 
     showCID();
     // if the money customer gave is less than the price due, give an alert
-    if (parseFloat(cash.value) < price) {
+    if (cashAmount < price) {
         alert("Customer does not have enough money to purchase the item");
-    } else if (parseFloat(cash.value) === price) {
+    } else if (cashAmount === price) {
         // if the money customer gave is equal to the price due, just take the money and add the money to cash drwer
         changeDue.innerHTML = "<p>No change due - customer paid with exact cash</p>"
     } else {
         // here we are going to mantain when the customer paid enough money
         // use the changeResult() function to check change status
-        isChangeEnough(parseFloat(cash.value));
+        isChangeEnough(cashAmount);
     }
 
 
@@ -165,10 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // detect user click event or press "Enter" after typing the number
 purchaseBtn.addEventListener("click", change)
-cash.addEventListener("keydown", (e) => {
+cash.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
         change();
     }
-    console.log(parseFloat(cash.value));
-    console.log(cashAmount);
 })
